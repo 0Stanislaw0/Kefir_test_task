@@ -64,7 +64,7 @@ async def  one_time_task(MAIN_URL):
     for uri in pages_urls:
         tasks = []
         # делаем запрос на след страницу
-        res = await request_page(uri)
+        res = await get_text(uri)
         # собираем ссылки на статьи
         url_posts = [i for i in res.xpath(URL_POSTS)]
 
