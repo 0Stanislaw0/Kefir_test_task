@@ -11,22 +11,6 @@ from aiohttp import ClientSession
 from aiohttp.client_exceptions import ClientError
 
 
-async def request_page(url):
-
-    ''' функция запроса страницы '''
-    async with ClientSession() as session:
-        async with session.get(url) as response:
-            if response.status == 200:
-                try:
-                    response = await response.text()
-                except UnicodeDecodeError as e:
-                    response = await response.read()
-                tree = html.fromstring(response)
-                return tree
-            else:
-                return None
-
-
 async def get_page_urls(tree):
 
     ''' собираем URL всех страниц '''
@@ -73,7 +57,7 @@ async def  one_time_task(MAIN_URL):
     result = []
     # парсим раздел
 
-    response = await request_page(MAIN_URL)
+    response = await get_text(MAIN_URL)
     # узнаем ссылки на каждую страницу со статьями
     pages_urls = await get_page_urls(response)
 
