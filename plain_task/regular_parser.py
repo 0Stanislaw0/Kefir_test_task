@@ -10,7 +10,7 @@ async def regular_task(MAIN_URL):
     result = []
     tasks = []
     # парсим раздел
-    response = await request_page(MAIN_URL)
+    response = await get_text(MAIN_URL)
     # собираем ссылки на статьи
     url_posts = [i for i in response.xpath(URL_POSTS)]
 
